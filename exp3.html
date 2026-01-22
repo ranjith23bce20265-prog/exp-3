@@ -48,35 +48,31 @@
     </div>
 
     <script>
-        // Function 1: Update title from the Dropdown menu
         function updateTitleFromDropdown() {
             var menu = document.getElementById("mySelector");
             document.getElementById("myTitle").innerText = menu.value;
         }
 
-        // Function 2: Update title from the Text Box
         function updateTitleFromInput() {
             var inputBox = document.getElementById("customInput");
             document.getElementById("myTitle").innerText = inputBox.value;
         }
 
-        // Function 3: Change the Background Color
         function changeBackgroundColor(colorPicker) {
-            // 'colorPicker.value' gets the hex code (e.g., #ff0000)
             document.body.style.backgroundColor = colorPicker.value;
         }
 
-        // Function 4: Hide or Show the Video
         function toggleVideo() {
             var videoDiv = document.getElementById("videoContainer");
             
             if (videoDiv.style.display === "none") {
-                videoDiv.style.display = "block"; // Show it
+                videoDiv.style.display = "block"; 
             } else {
-                videoDiv.style.display = "none";  // Hide it
+                videoDiv.style.display = "none";  
             }
         }
     </script>
 
 </body>
+
 </html>
