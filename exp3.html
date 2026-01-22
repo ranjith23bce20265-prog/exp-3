@@ -1,78 +1,137 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Interactive Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Media Center</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .section {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        #imageContainer, #videoContainer {
+            display: none;
+            margin-top: 20px;
+        }
+
+        img, video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        button, select {
+            padding: 12px 20px;
+            margin: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background-color: white;
+        }
+
+        button:hover {
+            background-color: #eee;
+        }
+
+        form {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        label {
+            font-size: 18px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body id="pageBody">
+<body>
 
-    <h3>1. Select a Title</h3>
-    <select id="mySelector" onchange="updateTitleFromDropdown()">
-        <option>Hello World!</option>
-        <option>Welcome User</option>
-        <option>My Video Page</option>
-    </select>
+    <div class="section">
+        <select id="titleSelector" onchange="changeTitle()">
+            <option value="Fruit Gallery">Fruit Gallery</option>
+            <option value="Tropical Beach">Tropical Beach</option>
+            <option value="Video Player">Video Player</option>
+        </select>
+    </div>
 
-    <hr>
+    <h1 id="mainTitle">Fruit Gallery</h1>
 
-    <h3>2. Or Type Your Own Title</h3>
-    <input type="text" id="customInput" placeholder="Type here...">
-    <button onclick="updateTitleFromInput()">Set Title</button>
+    <div class="section">
+        <form>
+            <input type="radio" name="fruit" id="apple" onclick="showFruit('apple')">
+            <label for="apple">Apple</label>
 
-    <hr>
+            <input type="radio" name="fruit" id="banana" onclick="showFruit('banana')">
+            <label for="banana">Banana</label>
 
-    <h3>3. Change Background Color</h3>
-    <input type="color" onchange="changeBackgroundColor(this)">
+            <input type="radio" name="fruit" id="orange" onclick="showFruit('orange')">
+            <label for="orange">Orange</label>
+        </form>
+    </div>
 
-    <hr>
+    <div class="section">
+        <button onclick="toggleVideo()">Show/Hide Video</button>
+    </div>
 
-    <h1 id="myTitle">Hello World!</h1>
+    <div id="imageContainer" class="section">
+        <img id="fruitImg" src="" alt="Fruit Image">
+    </div>
 
-    <p>Line one<br>Line two</p>
-    
-    <form>
-        <input type="radio" name="fruit"> Apple<br>
-        <input type="radio" name="fruit"> Banana
-    </form>
-    
-    <br>
-    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&w=400" width="400">
-    <br><br>
-
-    <button onclick="toggleVideo()">Hide/Show Video</button>
-    <br><br>
-
-    <div id="videoContainer">
-        <video width="400" controls>
-            <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+    <div id="videoContainer" class="section">
+        <video width="500" controls>
+            <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
         </video>
     </div>
 
     <script>
-        function updateTitleFromDropdown() {
-            var menu = document.getElementById("mySelector");
-            document.getElementById("myTitle").innerText = menu.value;
+        function changeTitle() {
+            var select = document.getElementById("titleSelector");
+            document.getElementById("mainTitle").innerText = select.value;
         }
 
-        function updateTitleFromInput() {
-            var inputBox = document.getElementById("customInput");
-            document.getElementById("myTitle").innerText = inputBox.value;
-        }
+        function showFruit(name) {
+            var container = document.getElementById("imageContainer");
+            var img = document.getElementById("fruitImg");
+            
+            var sources = {
+                'apple': 'https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=600',
+                'banana': 'https://images.unsplash.com/photo-1528825876-196227b75801?w=600',
+                'orange': 'https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=600'
+            };
 
-        function changeBackgroundColor(colorPicker) {
-            document.body.style.backgroundColor = colorPicker.value;
+            img.src = sources[name];
+            container.style.display = "block";
         }
 
         function toggleVideo() {
-            var videoDiv = document.getElementById("videoContainer");
-            
-            if (videoDiv.style.display === "none") {
-                videoDiv.style.display = "block"; 
+            var vid = document.getElementById("videoContainer");
+            if (vid.style.display === "block") {
+                vid.style.display = "none";
             } else {
-                videoDiv.style.display = "none";  
+                vid.style.display = "block";
             }
         }
     </script>
 
 </body>
-
 </html>
