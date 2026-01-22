@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Page</title>
+</head>
+<body id="pageBody">
+
+    <h3>1. Select a Title</h3>
+    <select id="mySelector" onchange="updateTitleFromDropdown()">
+        <option>Hello World!</option>
+        <option>Welcome User</option>
+        <option>My Video Page</option>
+    </select>
+
+    <hr>
+
+    <h3>2. Or Type Your Own Title</h3>
+    <input type="text" id="customInput" placeholder="Type here...">
+    <button onclick="updateTitleFromInput()">Set Title</button>
+
+    <hr>
+
+    <h3>3. Change Background Color</h3>
+    <input type="color" onchange="changeBackgroundColor(this)">
+
+    <hr>
+
+    <h1 id="myTitle">Hello World!</h1>
+
+    <p>Line one<br>Line two</p>
+    
+    <form>
+        <input type="radio" name="fruit"> Apple<br>
+        <input type="radio" name="fruit"> Banana
+    </form>
+    
+    <br>
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&w=400" width="400">
+    <br><br>
+
+    <button onclick="toggleVideo()">Hide/Show Video</button>
+    <br><br>
+
+    <div id="videoContainer">
+        <video width="400" controls>
+            <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script>
+        // Function 1: Update title from the Dropdown menu
+        function updateTitleFromDropdown() {
+            var menu = document.getElementById("mySelector");
+            document.getElementById("myTitle").innerText = menu.value;
+        }
+
+        // Function 2: Update title from the Text Box
+        function updateTitleFromInput() {
+            var inputBox = document.getElementById("customInput");
+            document.getElementById("myTitle").innerText = inputBox.value;
+        }
+
+        // Function 3: Change the Background Color
+        function changeBackgroundColor(colorPicker) {
+            // 'colorPicker.value' gets the hex code (e.g., #ff0000)
+            document.body.style.backgroundColor = colorPicker.value;
+        }
+
+        // Function 4: Hide or Show the Video
+        function toggleVideo() {
+            var videoDiv = document.getElementById("videoContainer");
+            
+            if (videoDiv.style.display === "none") {
+                videoDiv.style.display = "block"; // Show it
+            } else {
+                videoDiv.style.display = "none";  // Hide it
+            }
+        }
+    </script>
+
+</body>
+</html>
